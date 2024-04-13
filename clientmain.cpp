@@ -28,6 +28,8 @@ int main(int argc, char *argv[])
     char *port_no = strtok(NULL, ":");
     int port = atoi(port_no);
 
+    printf("Host %s, and port %d.\n", host, port);
+
     sockfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     if (sockfd < 0)
     {
@@ -93,52 +95,52 @@ int main(int argc, char *argv[])
     {
         int inResult1 = ntohl(protocol.inValue1) + ntohl(protocol.inValue2);
         protocol.inResult = htonl(inResult1);
-        printf("\n\nClient : %d\n", inResult1);
+        printf("\nClient : %d\n", inResult1);
     }
 
     else if (ntohl(protocol.arith) == 2)
     {
         int inResult1 = ntohl(protocol.inValue1) - ntohl(protocol.inValue2);
         protocol.inResult = htonl(inResult1);
-        printf("\n\nClient : %d\n", inResult1);
+        printf("\nClient : %d\n", inResult1);
     }
 
     else if (ntohl(protocol.arith) == 3)
     {
         int inResult1 = ntohl(protocol.inValue1) * ntohl(protocol.inValue2);
         protocol.inResult = htonl(inResult1);
-        printf("\n\nClient : %d\n", inResult1);
+        printf("\nClient : %d\n", inResult1);
     }
 
     else if (ntohl(protocol.arith) == 4)
     {
         int inResult1 = ntohl(protocol.inValue1) / ntohl(protocol.inValue2);
         protocol.inResult = htonl(inResult1);
-        printf("\n\nClient : %d\n", inResult1);
+        printf("\nClient : %d\n", inResult1);
     }
 
     else if (ntohl(protocol.arith) == 5)
     {
         protocol.flResult = protocol.flValue1 + protocol.flValue2;
-        printf("\n\nClient : %8.8g\n", protocol.flResult);
+        printf("\nClient : %8.8g\n", protocol.flResult);
     }
 
     else if (ntohl(protocol.arith) == 6)
     {
         protocol.flResult = protocol.flValue1 - protocol.flValue2;
-        printf("\n\nClient : %8.8g\n", protocol.flResult);
+        printf("\nClient : %8.8g\n", protocol.flResult);
     }
 
     else if (ntohl(protocol.arith) == 7)
     {
         protocol.flResult = protocol.flValue1 * protocol.flValue2;
-        printf("\n\nClient : %8.8g\n", protocol.flResult);
+        printf("\nClient : %8.8g\n", protocol.flResult);
     }
 
     else if (ntohl(protocol.arith) == 8)
     {
         protocol.flResult = protocol.flValue1 / protocol.flValue2;
-        printf("\n\nClient : %8.8g\n", protocol.flResult);
+        printf("\nClient : %8.8g\n", protocol.flResult);
     }
 
     // The obtained result is sent to the server.
@@ -158,7 +160,7 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    printf("\n\nServer : type : %d\tmessage : %d \t protocol : %d \n", ntohs(response.type), ntohl(response.message), ntohs(response.protocol));
+    printf("\nServer : type : %d\tmessage : %d \t protocol : %d \n", ntohs(response.type), ntohl(response.message), ntohs(response.protocol));
     if (ntohs(response.type) == 2 && ntohl(response.message) == 1 && ntohs(response.protocol) == 17)
         printf("\nStatus : OK\n\n");
     else
